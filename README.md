@@ -93,9 +93,18 @@ Commonly used metrics are `ids10k` and `ids36k5` (for FFHQ and Places2 respectiv
 
 Run the following command on a server with at least one NVIDIA GPU. Make sure to set the `PROJECT_DIR` variable to the root directory of the project.
 
+> Note: This is in 512x512.
 ```bash
 export PROJECT_DIR=/path/to/project
 docker run -it --gpus all -v "$PROJECT_DIR:/opt/project" --rm fredericfc/co-mod-gan:latest python /opt/project/run_generator.py -c /opt/project/models/co-mod-gan-ffhq-9-025000.pkl -i /opt/project/imgs/example_image.jpg -m /opt/project/imgs/example_mask.jpg -o /opt/project/imgs/example_output.jpg
+```
+
+Or with FFHQ in 1024x1024 resolution:
+
+```bash
+export MASK_NAME=00001.bmp
+export IMAGE_NAME=00000/00009.png
+docker run -it --gpus all -v "$PROJECT_DIR:/opt/project" --rm fredericfc/co-mod-gan:latest python /opt/project/run_generator.py -c /opt/project/models/co-mod-gan-ffhq-10-025000.pkl -i "/opt/project/datasets/ffhq/$IMAGE_NAME" -m "/opt/project/imgs/custom_masks_1024/$MASK_NAME" -o /opt/project/imgs/output_00000.jpg
 ```
 
 ## Citation

@@ -89,6 +89,15 @@ python run_metrics.py --data-dir=DATA_DIR --dataset=DATASET --network=CHECKPOINT
 
 Commonly used metrics are `ids10k` and `ids36k5` (for FFHQ and Places2 respectively), which will compute P-IDS and U-IDS together with FID. By default, masks are generated randomly for evaluation, or you may append the metric name with `-h0` ([0.0, 0.2]) to `-h4` ([0.8, 1.0]) to specify the range of masked ratio.
 
+## Running on Docker
+
+Run the following command on a server with at least one NVIDIA GPU. Make sure to set the `PROJECT_DIR` variable to the root directory of the project.
+
+```bash
+export PROJECT_DIR=/path/to/project
+docker run -it --gpus all -v "$PROJECT_DIR:/opt/project" --rm fredericfc/co-mod-gan:latest python /opt/project/run_generator.py -c /opt/project/models/co-mod-gan-ffhq-9-025000.pkl -i /opt/project/imgs/example_image.jpg -m /opt/project/imgs/example_mask.jpg -o /opt/project/imgs/example_output.jpg
+```
+
 ## Citation
 
 If you find this code helpful, please cite our paper:
